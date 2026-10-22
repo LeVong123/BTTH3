@@ -10,6 +10,12 @@ __pycache__/
 slide.pdf
 generate_pdf.py
 
+# Temporary PDF variants
+*_goc.pdf
+*_merged.pdf
+*_ChinhThuc*.pdf
+*_v2.pdf
+
 # Documentation markdown files (except RULES.md)
 *.md
 !RULES.md
