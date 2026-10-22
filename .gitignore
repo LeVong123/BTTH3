@@ -10,5 +10,6 @@ __pycache__/
 slide.pdf
 generate_pdf.py
 
-# Documentation markdown files per user instruction
+# Documentation markdown files (except RULES.md)
 *.md
+!RULES.md
