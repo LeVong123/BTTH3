@@ -9,6 +9,7 @@ Chứa các thành phần dùng chung:
     - LoopDetector: phát hiện lặp (3 tín hiệu)
 """
 import json
+import os
 import re
 from collections import deque
 from dataclasses import dataclass, field
@@ -188,8 +189,15 @@ class LoopDetector:
 
 
 # --- KIỂM TRA HALLUCINATION
-def ungrounded_facts(answer: str, log: list) -> list:
+def ungrounded_facts(answer, log: list) -> list:
     """Tìm flight code và giá tiền trong câu trả lời mà không có nguồn từ tool."""
+    if isinstance(answer, list):
+        answer = " ".join(
+            (b.get("text", "") if isinstance(b, dict) else str(b))
+            for b in answer
+        )
+    elif not isinstance(answer, str):
+        answer = str(answer)
     tool_text = json.dumps([result for _, _, result in log])
     facts = re.findall(r"\b[A-Z]{2}\d{3}\b", answer)                       # VN122
     facts += [
@@ -198,6 +206,41 @@ def ungrounded_facts(answer: str, log: list) -> list:
     ]  # 1,850,000
     return [f for f in facts if f not in tool_text]
 
+
+
+
+# =====================================================================
+# REAL LLM MODEL — sử dụng Google AI Studio (Gemini)
+# =====================================================================
+def load_real_model(model_name: str = "gemini-2.5-flash"):
+    """Tạo model LLM thật từ Google AI Studio.
+
+    Yêu cầu: File .env chứa GOOGLE_API_KEY hoặc biến môi trường GOOGLE_API_KEY.
+
+    Args:
+        model_name: Tên model Gemini, mặc định "gemini-2.0-flash".
+
+    Returns:
+        ChatGoogleGenerativeAI instance.
+    """
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    api_key = os.environ.get("GOOGLE_API_KEY", "")
+    if not api_key or api_key == "your_api_key_here":
+        raise ValueError(
+            "Chua cau hinh GOOGLE_API_KEY!\n"
+            "1. Truy cap https://aistudio.google.com/apikey de lay API key.\n"
+            "2. Mo file .env va thay 'your_api_key_here' bang API key that.\n"
+        )
+
+    from langchain_google_genai import ChatGoogleGenerativeAI
+    return ChatGoogleGenerativeAI(
+        model=model_name,
+        google_api_key=api_key,
+        temperature=0,
+        convert_system_message_to_human=True,
+    )
 
 # =====================================================================
 # SCRIPTED FAKE MODEL — chạy không cần API key

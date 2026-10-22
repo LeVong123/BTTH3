@@ -1,0 +1,50 @@
+{
+  "preferred_airline": {
+    "key": "preferred_airline",
+    "value": "Vietjet Air (VJ)",
+    "source": "Session 3 (tự động trích xuất)",
+    "status": "active",
+    "created_at": "2026-10-22T23:01:53",
+    "updated_at": "2026-10-22T23:03:07",
+    "history": [
+      {
+        "old_value": "Vietnam Airlines (VN)",
+        "old_source": "Session 1 (tự động trích xuất)",
+        "superseded_at": "2026-10-22T23:03:07",
+        "superseded_by": "Session 3 (tự động trích xuất)"
+      }
+    ]
+  },
+  "max_price": {
+    "key": "max_price",
+    "value": "2500000",
+    "source": "Session 3 (tự động trích xuất)",
+    "status": "active",
+    "created_at": "2026-10-22T23:01:53",
+    "updated_at": "2026-10-22T23:03:07",
+    "history": [
+      {
+        "old_value": "2000000",
+        "old_source": "Session 1 (tự động trích xuất)",
+        "superseded_at": "2026-10-22T23:03:07",
+        "superseded_by": "Session 3 (tự động trích xuất)"
+      }
+    ]
+  },
+  "depart_before": {
+    "key": "depart_before",
+    "value": "12:00",
+    "source": "Session 3 (tự động trích xuất)",
+    "status": "active",
+    "created_at": "2026-10-22T23:01:53",
+    "updated_at": "2026-10-22T23:03:07",
+    "history": [
+      {
+        "old_value": "12:00",
+        "old_source": "Session 1 (tự động trích xuất)",
+        "superseded_at": "2026-10-22T23:03:07",
+        "superseded_by": "Session 3 (tự động trích xuất)"
+      }
+    ]
+  }
+}

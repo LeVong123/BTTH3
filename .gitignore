@@ -1,0 +1,14 @@
+# Environment variables & secrets
+.env
+*.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Slide & Tools
+slide.pdf
+generate_pdf.py
+
+# Documentation markdown files per user instruction
+*.md
